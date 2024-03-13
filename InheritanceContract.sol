@@ -12,11 +12,11 @@ contract InheritanceContract {
         lastWithdrawal = block.timestamp;
     }
 
-    function withdraw(uint256 amount) public {
+    function withdraw(uint256 _amount) public {
         require(msg.sender == owner, "Only the owner can withdraw");
-        require(amount <= address(this).balance, "Insufficient balance");
+        require(_amount <= address(this).balance, "Insufficient balance");
         lastWithdrawal = block.timestamp;
-        payable(owner).transfer(amount);
+        payable(owner).transfer(_amount);
     }
 
     function claimControl() public {
@@ -26,8 +26,8 @@ contract InheritanceContract {
         heir = address(0);
     }
 
-    function designateNewHeir(address newHeir) public {
+    function designateNewHeir(address _newHeir) public {
         require(msg.sender == owner, "Only the owner can designate a new heir");
-        heir = newHeir;
+        heir = _newHeir;
     }
 }
